@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dagger 2.0 Android Example</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="user_name">Your name</string>
+    <string name="user_greeting">Hello %1$s!</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+</resources>

@@ -1,0 +1,78 @@
+group = 'com.svenjacobs.dagger'
+version = '0.1'
+
+def siteUrl = 'https://github.com/svenjacobs/dagger2-android-template'
+def gitUrl = 'https://github.com/svenjacobs/dagger2-android-template.git'
+
+bintray {
+    user = bintray_username
+    key = bintray_apikey
+    
+    configurations = ['archives']
+    publish = true
+    pkg {
+        repo = 'android'
+        name = "$group:$project.name"
+        desc = 'Dagger 2 Android Template'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/svenjacobs/dagger2-android-template/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['android', 'dagger']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'Dagger 2 Android Template'
+                url siteUrl
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'svenjacobs'
+                        name 'Sven Jacobs'
+                        email 'mail@svenjacobs.com'
+                    }
+                }
+
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

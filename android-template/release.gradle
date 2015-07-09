@@ -1,5 +1,5 @@
 group = 'com.svenjacobs.dagger'
-version = '0.1'
+version = '0.2-SNAPSHOT'
 
 def siteUrl = 'https://github.com/svenjacobs/dagger2-android-template'
 def gitUrl = 'https://github.com/svenjacobs/dagger2-android-template.git'
@@ -7,7 +7,7 @@ def gitUrl = 'https://github.com/svenjacobs/dagger2-android-template.git'
 bintray {
     user = bintray_username
     key = bintray_apikey
-    
+
     configurations = ['archives']
     publish = true
     pkg {

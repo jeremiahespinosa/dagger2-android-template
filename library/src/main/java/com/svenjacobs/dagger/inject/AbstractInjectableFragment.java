@@ -1,15 +1,13 @@
 package com.svenjacobs.dagger.inject;
 
-import android.os.Bundle;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 /**
  * Generic base class for injectable fragments.
  * <p/>
- * {@link #onComponentCreated(Object)} will be called in {@link #onViewCreated(View, Bundle)} or in
- * {@link #onActivityCreated(Bundle)} (for Fragments without an UI).
+ * {@link #onComponentCreated(Object)} will be called in {@link #onAttach(Activity)}.
  *
  * @see ComponentLifecycle
  */
@@ -25,11 +23,17 @@ public abstract class AbstractInjectableFragment<C> extends Fragment
     }
 
     @Override
-    public void onActivityCreated(final Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onAttach(final Activity activity) {
+        super.onAttach(activity);
 
-        // Component creation is also called here for Fragments that don't have a UI
-        createComponentIfRequired();
+        mComponent = createComponent();
+
+        if (mComponent == null) {
+            throw new NullPointerException("Component must not be null");
+        }
+
+        onComponentCreated(mComponent);
+        onPostComponentCreated();
     }
 
     @Override
@@ -40,25 +44,8 @@ public abstract class AbstractInjectableFragment<C> extends Fragment
     public void onPostComponentCreated() {
     }
 
-    @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        createComponentIfRequired();
-    }
-
     /**
      * Creates component instance.
      */
     protected abstract C createComponent();
-
-    private void createComponentIfRequired() {
-        if (mComponent != null) {
-            return;
-        }
-
-        mComponent = createComponent();
-        onComponentCreated(mComponent);
-        onPostComponentCreated();
-    }
 }

@@ -37,9 +37,16 @@ public abstract class AbstractInjectableActivity<C> extends AppCompatActivity
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        // Deliberately create the component before the super() call so that it's initialized in
+        // Fragment's onAttach()!
+        mComponent = createComponent();
+
+        if (mComponent == null) {
+            throw new NullPointerException("Component must not be null");
+        }
+
         super.onCreate(savedInstanceState);
 
-        mComponent = createComponent();
         onComponentCreated(mComponent);
         onPostComponentCreated();
     }

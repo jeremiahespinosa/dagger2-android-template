@@ -4,13 +4,13 @@ import java.lang.annotation.Retention;
 
 import javax.inject.Qualifier;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * Annotation added to {@link android.content.Context} injections for injecting the application's
  * context.
  */
 @Qualifier
-@Retention(RUNTIME)
+@Retention(SOURCE)
 public @interface AppContext {
 }

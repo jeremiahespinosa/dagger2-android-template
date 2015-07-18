@@ -1,5 +1,5 @@
 group = 'com.svenjacobs.dagger'
-version = '0.2-SNAPSHOT'
+version = '0.2'
 
 def siteUrl = 'https://github.com/svenjacobs/dagger2-android-template'
 def gitUrl = 'https://github.com/svenjacobs/dagger2-android-template.git'
@@ -70,6 +70,16 @@ task javadoc(type: Javadoc) {
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
+}
+
+task installArchives(type: Upload) {
+    description 'Installs the artifacts to the local Maven repository'
+    configuration = configurations['archives']
+    repositories {
+        mavenDeployer {
+            repository url: "file://${System.properties['user.home']}/.m2/repository"
+        }
+    }
 }
 
 artifacts {

@@ -4,13 +4,12 @@ import java.lang.annotation.Retention;
 
 import javax.inject.Scope;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
  * Annotation for Dagger component that is scoped to an Fragment.
  */
 @Scope
-@Retention(SOURCE)
+@Retention(CLASS)
 public @interface PerFragment {
 }

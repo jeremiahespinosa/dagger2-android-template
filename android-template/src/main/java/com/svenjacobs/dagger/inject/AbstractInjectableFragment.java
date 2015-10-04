@@ -1,6 +1,5 @@
 package com.svenjacobs.dagger.inject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,7 @@ import android.support.v4.app.Fragment;
 /**
  * Generic base class for injectable fragments.
  * <p/>
- * {@link #onComponentCreated(Object)} will be called in {@link #onAttach(Activity)}.
+ * {@link #onComponentCreated(Object)} will be called in {@link #onAttach(Context)}.
  *
  * @see ComponentLifecycle
  */

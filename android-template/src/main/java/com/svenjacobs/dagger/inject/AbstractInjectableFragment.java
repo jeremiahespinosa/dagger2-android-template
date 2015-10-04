@@ -1,6 +1,7 @@
 package com.svenjacobs.dagger.inject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
@@ -23,8 +24,8 @@ public abstract class AbstractInjectableFragment<C> extends Fragment
     }
 
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(final Context context) {
+        super.onAttach(context);
 
         mComponent = createComponent();
 

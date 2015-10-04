@@ -1,6 +1,6 @@
 package com.svenjacobs.dagger.example;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -28,10 +28,10 @@ public class MainFragment extends InjectableFragment {
     private Listener mListener;
 
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(final Context context) {
+        super.onAttach(context);
 
-        mListener = (Listener) activity;
+        mListener = (Listener) context;
     }
 
     @Override

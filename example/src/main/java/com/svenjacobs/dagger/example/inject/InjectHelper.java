@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import com.svenjacobs.dagger.example.ExampleApp;
 import com.svenjacobs.dagger.example.inject.components.ActivityComponent;
 import com.svenjacobs.dagger.example.inject.components.ApplicationComponent;
-import com.svenjacobs.dagger.inject.HasComponent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,7 +23,8 @@ public final class InjectHelper {
     public static ActivityComponent getActivityComponent(@NonNull final Activity activity) {
         checkNotNull(activity);
 
-        return getComponent(ActivityComponent.class, activity);
+        return com.svenjacobs.dagger.inject.InjectHelper.getComponent(ActivityComponent.class,
+                                                                      activity);
     }
 
     @NonNull
@@ -32,15 +32,5 @@ public final class InjectHelper {
         checkNotNull(context);
 
         return ((ExampleApp) context.getApplicationContext()).getComponent();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <C> C getComponent(@NonNull final Class<C> componentType,
-                                     @NonNull final Activity activity) {
-
-        checkNotNull(componentType);
-        checkNotNull(activity);
-
-        return componentType.cast(((HasComponent<C>) activity).getComponent());
     }
 }

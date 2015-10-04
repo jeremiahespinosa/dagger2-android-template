@@ -15,6 +15,7 @@ public interface ComponentLifecycle<C> {
      * <p/>
      * Configuration of injected objects should take place in {@link #onPostComponentCreated()}
      *
+     * @param component Component which should be used to inject dependencies
      * @see #onPostComponentCreated()
      */
     void onComponentCreated(@NonNull final C component);
